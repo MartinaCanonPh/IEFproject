@@ -20,7 +20,7 @@ const crypto_1 = require("./crypto");
 exports.NETWORKTYPE = symbol_sdk_1.NetworkType.TEST_NET;
 exports.MOSAIC_NAME = 'covidcoins';
 const HELP = 'martina.canonaco98@gmail.com or alihbek@outlook.com';
-const MOSAIC_ID_COVIDCOIN = '4874CC76E6189F82';
+const MOSAIC_ID_COVIDCOIN = '716A65C6DA06EAC8';
 const nodeUrl = 'http://api-01.ap-northeast-1.testnet-0951-v1.symboldev.network:3000/';
 const repositoryFactory = new symbol_sdk_1.RepositoryFactoryHttp(nodeUrl);
 const accountHttp = repositoryFactory.createAccountRepository();
@@ -55,7 +55,7 @@ function getBalance(address) {
         accountHttp.getAccountInfo(address).subscribe((accountInfo) => {
             console.log(accountInfo);
             let mosaics = accountInfo.mosaics;
-            let mosaic = mosaics.find((mosaic) => mosaic.id.toHex() == MOSAIC_ID_COVIDCOIN);
+            let mosaic = mosaics.find((mosaic) => { mosaic.id.toHex() == MOSAIC_ID_COVIDCOIN; });
             if (mosaic) {
                 console.log(`\nYou have ${mosaic.amount.toString()} ${exports.MOSAIC_NAME} in your wallet.`);
             }
