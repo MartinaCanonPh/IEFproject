@@ -59,11 +59,10 @@ export async function getBalance(address: Address): Promise<boolean>
             console.log(`\nYou have 0 ${MOSAIC_NAME} in your balance.`);
             console.log(`\nYou could ask to ${HELP} for some ${MOSAIC_NAME}`);
         }
-    });
-
+    }),
     (err: Error) => {
         console.log(`An error was happening and it was not possible to check the balance ${err}`);
-    }
+    }; 
 
     return true;
 }

@@ -63,10 +63,10 @@ function getBalance(address) {
                 console.log(`\nYou have 0 ${exports.MOSAIC_NAME} in your balance.`);
                 console.log(`\nYou could ask to ${HELP} for some ${exports.MOSAIC_NAME}`);
             }
-        });
-        (err) => {
-            console.log(`An error was happening and it was not possible to check the balance ${err}`);
-        };
+        }),
+            (err) => {
+                console.log(`An error was happening and it was not possible to check the balance ${err}`);
+            };
         return true;
     });
 }
