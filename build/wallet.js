@@ -77,14 +77,22 @@ function doTransaction(signedTransaction) {
 exports.doTransaction = doTransaction;
 function testTransaction() {
     return __awaiter(this, void 0, void 0, function* () {
-        const account = yield storage_1.loadAccount();
-        const to = 'TB6LOZUBF2XUUJDKAVLXYCIDQ2U4GI57EOPFWLI4';
-        const amount = 10;
-        const text = 'This is a transaction';
-        const rawTransaction = createTransaction(to, amount, text);
-        const signedTransaction = signTransaction(account, rawTransaction);
-        yield doTransaction(signedTransaction);
-        return true;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            const account = yield storage_1.loadAccount();
+            //user will write in input these datas
+            const to = 'TB6LOZUBF2XUUJDKAVLXYCIDQ2U4GI57EOPFWLI4';
+            const amount = 10;
+            const text = 'This is a transaction';
+            const rawTransaction = createTransaction(to, amount, text);
+            const signedTransaction = signTransaction(account, rawTransaction);
+            yield doTransaction(signedTransaction);
+            try {
+                resolve(true);
+            }
+            catch (_a) {
+                reject(false);
+            }
+        }));
     });
 }
 exports.testTransaction = testTransaction;

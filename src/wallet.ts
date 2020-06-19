@@ -101,18 +101,25 @@ export async function doTransaction(signedTransaction: SignedTransaction): Promi
 
 export async function testTransaction(): Promise<boolean>
 {
-    const account = await loadAccount()
-
-    const to = 'TB6LOZUBF2XUUJDKAVLXYCIDQ2U4GI57EOPFWLI4';
-    const amount = 10;
-    const text = 'This is a transaction';
-
-    const rawTransaction = createTransaction(to,amount,text);
-    const signedTransaction = signTransaction(account, rawTransaction);
-
-    await doTransaction(signedTransaction)
-
-    return true;
+    return new Promise<boolean> ( async (resolve, reject) =>
+    {
+        const account = await loadAccount();
+        //user will write in input these datas
+        const to = 'TB6LOZUBF2XUUJDKAVLXYCIDQ2U4GI57EOPFWLI4';
+        const amount = 10;
+        const text = 'This is a transaction';
+    
+        const rawTransaction = createTransaction(to,amount,text);
+        const signedTransaction = signTransaction(account, rawTransaction);
+    
+        await doTransaction(signedTransaction)
+        
+        try{
+            resolve(true)
+        } catch {
+            reject(false)
+        }
+    });    
 }
 
 export async function getBalance(address: Address): Promise<boolean>
