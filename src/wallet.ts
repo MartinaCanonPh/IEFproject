@@ -17,7 +17,7 @@ import {
     SignedTransaction
 } from 'symbol-sdk';
 import readlineSync from 'readline-sync';
-import {storeSecrets, Secrets} from './storage';
+import {storeSecrets, Secrets, loadAccount} from './storage';
 import {generateMnemonicPrivateKey} from './crypto';
 
 export const NETWORKTYPE = NetworkType.TEST_NET;
@@ -67,7 +67,7 @@ export async function getAccountInfo(address: Address): Promise<boolean>
 }
 
 // creating a Transaction
-function createTransaction(rawRecipientAddress: string, amount: number, text: string): TransferTransaction
+export function createTransaction(rawRecipientAddress: string, amount: number, text: string): TransferTransaction
 {
     const recipientAddress = Address.createFromRawAddress(rawRecipientAddress);
     const currency = new MosaicId(MOSAIC_ID_COVIDCOIN);
@@ -85,18 +85,34 @@ function createTransaction(rawRecipientAddress: string, amount: number, text: st
 }
 
 // sign the Transaction
-function signTransaction(account: Account, transaction: TransferTransaction): SignedTransaction
+export function signTransaction(account: Account, transaction: TransferTransaction): SignedTransaction
 {
     return account.sign(transaction, generationHash);
 }
 
 // announce the transaction to the network
-async function doTransaction(signedTransaction: SignedTransaction): Promise<void>
+export async function doTransaction(signedTransaction: SignedTransaction): Promise<void>
 {
     transactionRepository.announce(signedTransaction).subscribe(
         (transaction) => console.log(transaction),
         (err: Error) => console.log(`It was not possible to perform the transaction ${err}`)
     );
+}
+
+export async function testTransaction(): Promise<boolean>
+{
+    const account = await loadAccount()
+
+    const to = 'TB6LOZUBF2XUUJDKAVLXYCIDQ2U4GI57EOPFWLI4';
+    const amount = 10;
+    const text = 'This is a transaction';
+
+    const rawTransaction = createTransaction(to,amount,text);
+    const signedTransaction = signTransaction(account, rawTransaction);
+
+    await doTransaction(signedTransaction)
+
+    return true;
 }
 
 export async function getBalance(address: Address): Promise<boolean>

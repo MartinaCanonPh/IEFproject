@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loadWallet = exports.storeSecrets = void 0;
+exports.loadAccount = exports.loadWallet = exports.storeSecrets = void 0;
 const os_1 = __importDefault(require("os"));
 const fs_1 = __importDefault(require("fs"));
 const symbol_sdk_1 = require("symbol-sdk");
@@ -55,3 +55,14 @@ function loadWallet() {
     });
 }
 exports.loadWallet = loadWallet;
+function loadAccount() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const PATH_HOME = `${os_1.default.homedir()}/${wallet_1.MOSAIC_NAME}-wallets`;
+        const PATH_WALLET = `${PATH_HOME}/${wallet_1.MOSAIC_NAME}-wallet.enry`;
+        const text = fs_1.default.readFileSync(PATH_WALLET, 'utf8');
+        const secrets = JSON.parse(text);
+        const account = symbol_sdk_1.Account.createFromPrivateKey(secrets.privateKey, wallet_1.NETWORKTYPE);
+        return account;
+    });
+}
+exports.loadAccount = loadAccount;

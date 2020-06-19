@@ -1,8 +1,9 @@
 import os from 'os';
 import fs from 'fs';
-import { Password, SimpleWallet, NetworkType } from 'symbol-sdk';
+import { Account, Password, SimpleWallet, NetworkType } from 'symbol-sdk';
 import readlineSync from 'readline-sync';
 import {MOSAIC_NAME, NETWORKTYPE} from './wallet';
+import { async } from 'hasha';
 
 export type Secrets = {
     password: Password,
@@ -61,4 +62,17 @@ export async function loadWallet(): Promise<SimpleWallet>
     
     console.log(`\nWallet Public Key is: ${wallet.address.pretty()}`);
     return wallet;
+}
+
+export async function loadAccount(): Promise<Account>
+{
+    const PATH_HOME = `${os.homedir()}/${MOSAIC_NAME}-wallets`;
+    const PATH_WALLET = `${PATH_HOME}/${MOSAIC_NAME}-wallet.enry`;
+
+    const text = fs.readFileSync(PATH_WALLET, 'utf8');
+    const secrets: Secrets = JSON.parse(text);
+
+    const account = Account.createFromPrivateKey(secrets.privateKey, NETWORKTYPE);
+
+    return account;
 }

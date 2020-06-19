@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const wallet_1 = require("./wallet");
-const storage_1 = require("./storage");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         //createAccount();
-        const wallet = yield storage_1.loadWallet();
-        wallet_1.getBalance(wallet.address);
+        //const wallet = await loadWallet();
+        //getBalance(wallet.address);
+        wallet_1.testTransaction();
     });
 }
 main();
