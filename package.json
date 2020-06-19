@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:build": "tsc -w",
-    "start:run": "nodemon build build/index.js",
-    "start": "concurrently npm:start:*"
+    "build": "tsc && node build/index.js",
+    "compile": "rimraf build && tsc",
+    "watch-and-run": "ts-node-dev --respawn -- src/index.ts"
   },
   "author": "",
   "license": "ISC",
