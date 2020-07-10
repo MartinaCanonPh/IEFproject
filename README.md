@@ -12,25 +12,25 @@ This project is connected with the course "Informatics for Economy and Finance" 
 
 If you want to test the app and receive some CovidCoin just send us an email with your PUBLIC ADDRESS.
 
-# Run the project:
+## Run the project:
 
-# 1. Clone or download the repo.
+### 1. Clone or download the repo.
 
-# 2. Install Dependencies:
+### 2. Install Dependencies:
 
     cd symbol-cli-wallet
     yarn
 
-# 3. Pull out the .zip folder where you want.
+### 3. Pull out the .zip folder where you want.
 
-# 4. Compile the project on terminal or on your favourite IDE:
+### 4. Compile the project on terminal or on your favourite IDE:
 
     Win: tsc \src\index.ts
     Lin&Others: yarn build
 
-# 5. Run the project on terminal or on your favourite IDE:
+### 5. Run the project on terminal or on your favourite IDE:
 
     Win: node \src\index.ts
     Lin&Others: yarn start
 
-Enjoy!
+## Enjoy!
