@@ -12,6 +12,10 @@ This project is connected with the course "Informatics for Economy and Finance" 
 
 If you want to test the app and receive some CovidCoin just send us an email with your PUBLIC ADDRESS.
 
+You can also do multisignature transaction using:
+Address: TARCV2-AUQDWV-LBPZP4-BYIRKS-XNQ7MX-EIWNDO-3VEB
+Public Key: EE03382FEEFF8F8C533EFD3CF8C75BF27513E59E61EEE32AD5B1462F16CB5889
+
 ## Run the project:
 
 ### 1. Clone or download the repo.
